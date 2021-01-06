@@ -1,0 +1,1 @@
+# BeyondNet.Samples.NextJs
