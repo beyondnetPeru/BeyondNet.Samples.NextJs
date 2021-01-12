@@ -12,7 +12,7 @@ export class AuthResolver {
   async register(
     @Arg("input") { email, password }: AuthInput
   ): Promise<UserResponse> {
-    const existingUser = await UserModel.findOne({ email });
+    const existingUser = await UserModel.findOne({ email }).lean();
 
     if (existingUser) throw new Error("Email already exists");
 

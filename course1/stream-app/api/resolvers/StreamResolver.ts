@@ -21,13 +21,13 @@ import { Stream, StreamModel } from "../entity/Stream";
 export class StreamResolver {
   @Query(() => Stream, { nullable: true })
   stream(@Arg("streamId", () => ObjectIdScalar) streamId: ObjectId) {
-    return StreamModel.findById(streamId);
+    return StreamModel.findById(streamId).lean();
   }
 
   @Query(() => Stream)
   @UseMiddleware(isAuth)
   streams(@Ctx() ctx: MyContext) {
-    return StreamModel.find({ author: ctx.res.locals.userId });
+    return StreamModel.find({ author: ctx.res.locals.userId }).lean();
   }
 
   @Mutation(() => Stream)
@@ -58,7 +58,7 @@ export class StreamResolver {
       { _id: id, author: ctx.res.locals.userId },
       { title, description, url },
       { runValidators: true, new: true }
-    );
+    ).lean();
 
     if (!stream) throw new Error("Stream not found");
 
@@ -74,7 +74,7 @@ export class StreamResolver {
     const deleted = await StreamModel.findOneAndDelete({
       _id: streamId,
       author: ctx.res.locals.userId,
-    });
+    }).lean();
 
     if (!deleted) throw new Error("Stream not found");
 
@@ -83,6 +83,6 @@ export class StreamResolver {
 
   @FieldResolver()
   async author(@Root() stream: Stream): Promise<User | null> {
-    return await UserModel.findById(stream.author);
+    return await UserModel.findById(stream.author).lean();
   }
 }
