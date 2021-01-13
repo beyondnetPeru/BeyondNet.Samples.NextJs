@@ -10,7 +10,7 @@ input AuthInput {
 
 type Mutation {
   addStream(input: StreamInput!): Stream!
-  deleteStream(streamId: ObjectId!): Stream!
+  deleteStream(streamId: ObjectId!): Boolean!
   editStream(input: StreamInput!): Stream!
   login(input: AuthInput!): UserResponse!
   register(input: AuthInput!): UserResponse!
@@ -22,7 +22,7 @@ scalar ObjectId
 type Query {
   currentUser: User
   stream(streamId: ObjectId!): Stream
-  streams: Stream!
+  streams: [Stream!]!
   user(userId: ObjectId!): User
 }
 

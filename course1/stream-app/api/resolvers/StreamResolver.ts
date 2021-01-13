@@ -24,7 +24,7 @@ export class StreamResolver {
     return StreamModel.findById(streamId).lean();
   }
 
-  @Query(() => Stream)
+  @Query(() => [Stream])
   @UseMiddleware(isAuth)
   streams(@Ctx() ctx: MyContext) {
     return StreamModel.find({ author: ctx.res.locals.userId }).lean();
@@ -65,7 +65,7 @@ export class StreamResolver {
     return stream;
   }
 
-  @Mutation(() => Stream)
+  @Mutation(() => Boolean)
   @UseMiddleware(isAuth)
   async deleteStream(
     @Arg("streamId", () => ObjectIdScalar) streamId: ObjectId,
