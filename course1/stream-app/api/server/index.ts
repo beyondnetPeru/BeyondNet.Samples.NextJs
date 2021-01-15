@@ -16,7 +16,7 @@ async function createServer() {
     const app = express();
 
     const corsOptions = {
-      origin: "hhtp://localhost:3000",
+      origin: process.env.ORIGIN_CLIENT,
       credentials: true,
     };
 
