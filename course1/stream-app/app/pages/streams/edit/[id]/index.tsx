@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { initializeApollo } from 'lib/apollo';
+
 import { useEditStreamMutation } from 'lib/graphql/editStream.graphql';
 import { useDeleteStreamMutation } from 'lib/graphql/deleteStream.graphql';
 import { StreamDocument } from 'lib/graphql/stream.graphql';
@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import { InitializeApollo } from 'lib/apollo';
 
 export default function EditStream({ id }) {
   const router = useRouter();
@@ -25,7 +26,7 @@ export default function EditStream({ id }) {
   const { _id, title, description, url } = state;
 
   const fetchStream = async () => {
-    const apollo = initializeApollo();
+    const apollo = InitializeApollo();
     const { data } = await apollo.query({
       query: StreamDocument,
       variables: { streamId: id },
