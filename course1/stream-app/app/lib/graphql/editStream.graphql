@@ -1,8 +1,8 @@
 mutation EditStream($input: StreamInput!) {
-    editStream(input: $input) {
-        _id
-        title
-        description
-        url
-    }
+  editStream(input: $input) {
+    _id
+    title
+    description
+    url
+  }
 }

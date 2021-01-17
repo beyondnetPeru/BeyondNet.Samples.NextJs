@@ -1,8 +1,8 @@
 query Streams {
-    streams {
-        _id
-        title
-        description
-        url
-    }
+  streams {
+    _id
+    title
+    description
+    url
+  }
 }
